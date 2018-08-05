@@ -11,6 +11,9 @@ class VoteSerializer(serializers.ModelSerializer):
 class ChoiceSerializer(serializers.ModelSerializer):
     votes = VoteSerializer(many=True, required=False)
 
+    def create(self, validated_data):
+        return Choice.objects.create(**validated_data)
+
     class Meta:
         model = Choice
         fields = '__all__'
